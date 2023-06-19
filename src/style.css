@@ -43,6 +43,11 @@ main {
     align-items: normal;
 }
 
+.project-title {
+    padding: 1rem;
+    font-size: 1.2rem;
+}
+
 .tasks {
     background-color: bisque;
     grid-row: 2 / 3;

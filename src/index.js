@@ -1,10 +1,12 @@
 import './style.css'
 import Task from './task'
 import Project from './project'
+ 
+// title, description, dueDate, prioriry
 
 const defaultProject = new Project("Default Project");
-defaultProject.tasks.push('Eat');
-defaultProject.tasks.push('Sleep');
+defaultProject.tasks.push(new Task('Eat', 'Eat something healthy', 1, 3));
+defaultProject.tasks.push(new Task('Sleep', '8hrs a day', 1, 2));
 localStorage.setItem(defaultProject.title, JSON.stringify(defaultProject.tasks));
 updateProjectsList();
 
@@ -26,8 +28,18 @@ const addTaskForm = document.querySelector(".add-task");
 addTaskForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const tasks = JSON.parse(localStorage.getItem(currentProject));
-    tasks.push(event.target["task-text"].value);
-    event.target["task-text"].value = "";
+
+    const title = event.target['task-text'].value;
+    const description = event.target['task-description'].value;
+    const date = event.target['task-date'].value;
+    const priority = event.target['priority'].value;
+
+    const newTask = new Task(title, description, date, priority)
+
+    console.log(newTask)
+    tasks.push(newTask);
+    
+    event.target.reset();
 
     localStorage.setItem(currentProject, JSON.stringify(tasks))
     updateTasksList(currentProject);
@@ -72,7 +84,14 @@ function updateTasksList(project) {
     tasksList.innerHTML = "";
     tasks.forEach((task) => {
         const taskDiv = document.createElement('div');
-        taskDiv.textContent = task;
+        const taskTitle = document.createElement('h4');
+        taskTitle.textContent = task.title;
+        const taskDescription = document.createElement('p');
+        taskDescription.textContent = task.description;
+
+        taskDiv.appendChild(taskTitle);
+        taskDiv.appendChild(taskDescription);
+
         tasksList.appendChild(taskDiv)
     })
 }

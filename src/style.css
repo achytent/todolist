@@ -34,18 +34,39 @@ main {
     font-weight: bold;
 }
 
-.sidebar > form {
+.add-project {
     width: 60%;
     display: flex;
     flex-direction: column;
-    padding: 1em;
+    padding: 1.2em;
+    margin-left: 2rem;
     gap: 0.5em;
     align-items: normal;
+    border: 2px solid black;
+    background-color: white;
 }
 
 .project-title {
     padding: 1rem;
     font-size: 1.2rem;
+    margin-left: 2rem;
+    border: 2px solid black;
+    background-color: white;
+    width: 62%;
+}
+
+.remove-project {
+    background: none;
+    border: 1px black solid;
+    border-radius: 0.3rem;
+    margin: 1rem;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.remove-project:hover {
+    transform: scale(1.2);
+    transition: .3s;
 }
 
 .add-task {
@@ -53,11 +74,44 @@ main {
     flex-direction: column;
     align-items: flex-start;
     width: 10rem;
-    
+    padding: 2rem;
+    gap: 0.3rem;
+    border: 2px black solid;
+    background-color: white;
+    margin: 1rem;
 }
 
 .tasks {
     background-color: bisque;
     grid-row: 2 / 3;
     grid-column: 2 / 3;
+}
+
+.task {
+    border: 2px black solid;
+    background-color: white;
+    width: 40%;
+    margin: 1rem;
+    padding: 0.2rem;
+}
+
+.priority {
+    display: flex;
+}
+
+input[type=radio] {
+    margin-left: 1rem;
+    margin-right: 0.2rem;
+}
+
+.urgent {
+    color: red;
+}
+
+.normal {
+    color: blue;
+}
+
+.easy {
+    color: green;
 }

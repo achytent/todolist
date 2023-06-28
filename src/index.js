@@ -6,8 +6,8 @@ import { updateProjectsList, updateTasksList } from './render';
 // title, description, dueDate, prioriry
 
 const defaultProject = new Project("Default Project");
-defaultProject.tasks.push(new Task('Eat', 'Eat something healthy', 1, 3));
-defaultProject.tasks.push(new Task('Sleep', '8hrs a day', 1, 2));
+defaultProject.tasks.push(new Task('Eat', 'Eat something healthy', "2022-11-09", "3"));
+defaultProject.tasks.push(new Task('Sleep', '8hrs a day', "2022-11-09", "2"));
 localStorage.setItem(defaultProject.title, JSON.stringify(defaultProject.tasks));
 updateProjectsList();
 
@@ -53,9 +53,22 @@ function removeProject(event){
     updateProjectsList();
 }
 
+function removeTask(event){
+    const taskToRemove = event.target.dataset.task;
+    const tasks = JSON.parse(localStorage.getItem(currentProject));
+    tasks.forEach(task => {
+        if(task.title == taskToRemove){
+            tasks.splice(tasks.indexOf(task), 1);
+            return 0;
+        }
+    })
+    localStorage.setItem(currentProject, JSON.stringify(tasks));
+    updateTasksList(currentProject);
+}
+
 function changeProject(project) {
     currentProject = project;
     updateTasksList(project);
 }
 
-export { removeProject, changeProject }
+export { removeProject, changeProject, removeTask }

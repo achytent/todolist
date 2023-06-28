@@ -1,4 +1,4 @@
-import { changeProject, removeProject } from "./index";
+import { changeProject, removeProject, removeTask } from "./index";
 
 function updateTasksList(project) {
     const tasks = JSON.parse(localStorage.getItem(project));
@@ -11,9 +11,32 @@ function updateTasksList(project) {
         taskTitle.textContent = task.title;
         const taskDescription = document.createElement('p');
         taskDescription.textContent = task.description;
+        const taskDate = document.createElement('p');
+        taskDate.textContent = task.dueDate;
+        taskDiv.classList.add('task');
+
+        switch(task.priority){
+            case "1":
+                taskDiv.classList.add('easy');
+                break;
+            case "2":
+                taskDiv.classList.add('normal');
+                break;
+            case "3":
+                taskDiv.classList.add('urgent');
+                break;
+        }
+
+        const taskRemoveBtn = document.createElement('button');
+        taskRemoveBtn.textContent = "X";
+        taskRemoveBtn.classList.add('remove-task');
+        taskRemoveBtn.dataset.task = task.title;
+        taskRemoveBtn.addEventListener('click', (event) => removeTask(event));
 
         taskDiv.appendChild(taskTitle);
         taskDiv.appendChild(taskDescription);
+        taskDiv.appendChild(taskDate);
+        taskDiv.appendChild(taskRemoveBtn);
 
         tasksList.appendChild(taskDiv)
     })

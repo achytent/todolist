@@ -3,7 +3,7 @@ export default class Task {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
-        this.prioriry = prioriry;
+        this.priority = prioriry;
     }
 }
 
